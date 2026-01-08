@@ -1,64 +1,92 @@
-import Image from "next/image";
+"use client";
+import { useState } from 'react';
+import Hero from '../components/Hero';
+import Navigation from '../components/Navigation';
+import Existence from '../components/Existence';
+import Tawheed from '../components/Tawheed';
+import WhyIslam from '../components/WhyIslam';
+import Pillars from '../components/Pillars';
+import ImaanContent from '../components/Imaan';
+import IhsanContent from '../components/Ihsan';
+import QnaContent from '../components/Qna';
 
 export default function Home() {
+  // Start on 'home' so the Title Page is the first thing seen
+  const [activeSection, setActiveSection] = useState('home');
+
+  // Define the order of the journey
+  const journeyOrder = [
+    { id: 'home', label: 'Home' },
+    { id: 'logic', label: 'Existence' },
+    { id: 'tawheed', label: 'The Core (Tawheed)' },
+    { id: 'why-islam', label: 'Why Islam?' },
+    { id: 'pillars', label: 'Al-Islam (The 5 Pillars)' },
+    { id: 'imaan', label: 'Al-Imaan (The 6 Pillars)' },
+    { id: 'ihsan', label: 'Ihsan: The Highest Level' },
+    { id: 'qna', label: 'Questions' }
+  ];
+
+  const currentIndex = journeyOrder.findIndex(item => item.id === activeSection);
+  const prevSection = journeyOrder[currentIndex - 1];
+  const nextSection = journeyOrder[currentIndex + 1];
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.js file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="flex flex-col md:flex-row min-h-screen bg-[#FDFCF8]">
+      
+      {/* 1. Sidebar Navigation - Stays tiny on the side */}
+      <Navigation active={activeSection} setActiveSection={setActiveSection} />
+      
+      {/* 2. Main Content Area */}
+      {/* The ternary check below removes padding and max-width ONLY for the home section */}
+      <main className={`flex-1 flex flex-col ${
+        activeSection === 'home' 
+        ? 'w-full h-screen' 
+        : 'max-w-5xl mx-auto md:p-12 p-6'
+      }`}>
+        
+        {/* Container for components */}
+        <div className={`flex-1 ${
+          activeSection === 'home' 
+          ? '' 
+          : 'animate-in fade-in slide-in-from-right-8 duration-700 min-h-[70vh]'
+        }`}>
+          {activeSection === 'home' && (
+            <Hero onStart={() => setActiveSection('logic')} />
+          )}
+          
+          {activeSection === 'logic' && <Existence />}
+          {activeSection === 'tawheed' && <Tawheed />}
+          {activeSection === 'why-islam' && <WhyIslam />}
+          {activeSection === 'pillars' && <Pillars />}
+          {activeSection === 'imaan' && <ImaanContent />}
+          {activeSection === 'ihsan' && <IhsanContent />}
+          {activeSection === 'qna' && <QnaContent />}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+
+        {/* 3. JOURNEY CONTROLS - Hidden on Home Page for a clean look */}
+        {activeSection !== 'home' && (
+          <div className="mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 pb-12">
+            {prevSection && prevSection.id !== 'home' ? (
+              <button 
+                onClick={() => setActiveSection(prevSection.id)}
+                className="group flex flex-col items-start gap-1 p-4 rounded-2xl border-2 border-slate-100 hover:border-emerald-500 transition-all w-full md:w-auto"
+              >
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em]">Previous Step</span>
+                <span className="font-bold text-slate-900 group-hover:text-emerald-700">← {prevSection.label}</span>
+              </button>
+            ) : <div />}
+
+            {nextSection && (
+              <button 
+                onClick={() => setActiveSection(nextSection.id)}
+                className="group flex flex-col items-end gap-1 p-4 rounded-2xl border-2 border-emerald-100 bg-emerald-50 hover:bg-emerald-600 transition-all w-full md:w-auto"
+              >
+                <span className="text-[10px] font-black text-emerald-600 group-hover:text-emerald-200 uppercase tracking-[0.2em]">Next Step</span>
+                <span className="font-bold text-emerald-900 group-hover:text-white">{nextSection.label} →</span>
+              </button>
+            )}
+          </div>
+        )}
       </main>
     </div>
   );
