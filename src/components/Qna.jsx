@@ -6,7 +6,7 @@ export default function QnaContent() {
 
   // Define your contact details here
   const WHATSAPP_NUMBER = "0540936067"; // Replace with your actual number (include country code, no + or spaces)
-  const CONTACT_EMAIL = "maryamamir@gmail.com"; // Replace with your actual email
+  const CONTACT_EMAIL = "maryamamir74774@gmail.com"; // Replace with your actual email
   const DEFAULT_MESSAGE = "Assalamu Alaikum, I have a question about Islam...";
 
   const categories = [
