@@ -15,7 +15,7 @@ export default function Navigation({ active, setActiveSection }) {
   ];
 
   const MenuContent = () => (
-    <div className="flex flex-col gap-2 p-4">
+    <div className="flex flex-col gap-2 p-4 pb-20">
       <h2 className="text-xs font-bold text-slate-400 uppercase tracking-widest px-4 mb-2">The Journey</h2>
       {steps.map((step) => (
         <button
@@ -46,7 +46,7 @@ export default function Navigation({ active, setActiveSection }) {
 
   return (
     <>
-      {/* MOBILE HEADER (Only shows on small screens) */}
+      {/* MOBILE HEADER */}
       <div className="md:hidden sticky top-0 bg-white border-b p-4 flex justify-between items-center z-50">
         <span className="font-bold text-emerald-900 tracking-tighter">NOOR.</span>
         <button onClick={() => setIsOpen(!isOpen)} className="p-2 bg-emerald-50 rounded-lg text-emerald-700">
@@ -56,15 +56,15 @@ export default function Navigation({ active, setActiveSection }) {
 
       {/* MOBILE SLIDE-OUT MENU */}
       {isOpen && (
-        <div className="md:hidden fixed inset-0 bg-white z-40 pt-20">
+        <div className="md:hidden fixed inset-0 bg-white z-40 pt-20 overflow-y-auto">
           <MenuContent />
         </div>
       )}
 
-      {/* DESKTOP SIDEBAR (Only shows on big screens) */}
-      <aside className="hidden md:block w-72 h-screen sticky top-0 border-r border-slate-100 bg-white overflow-y-auto">
+      {/* DESKTOP SIDEBAR */}
+      <aside className="hidden md:block w-72 h-screen sticky top-0 border-r border-slate-100 bg-white/50 backdrop-blur-md overflow-y-auto">
         <div className="p-8">
-          <h1 className="text-2xl font-black text-emerald-900 tracking-tighter mb-8">NOOR.</h1>
+          <h1 className="text-2xl font-black text-slate-950 mb-12 tracking-tighter">NOOR<span className="text-emerald-500">.</span></h1>
           <MenuContent />
         </div>
       </aside>
