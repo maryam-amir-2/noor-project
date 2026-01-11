@@ -1,5 +1,5 @@
 "use client";
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; // Added useEffect here
 import Hero from '../components/Hero';
 import Navigation from '../components/Navigation';
 import Existence from '../components/Existence';
@@ -12,6 +12,11 @@ import QnaContent from '../components/Qna';
 
 export default function Home() {
   const [activeSection, setActiveSection] = useState('home');
+
+  // AUTO-SCROLL FIX: This runs every time the section changes
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [activeSection]);
 
   const journeyOrder = [
     { id: 'home', label: 'Home' },
@@ -33,14 +38,12 @@ export default function Home() {
       
       <Navigation active={activeSection} setActiveSection={setActiveSection} />
       
-      {/* UPDATED: Changed p-6 to px-0 py-6 on mobile (Line 38) */}
       <main className={`flex-1 flex flex-col ${
         activeSection === 'home' 
         ? 'w-full h-screen' 
         : 'max-w-5xl mx-auto md:p-12 px-0 py-6'
       }`}>
         
-        {/* UPDATED: Changed slide-in-from-right-8 to right-4 for mobile (Line 43) */}
         <div className={`flex-1 ${
           activeSection === 'home' 
           ? '' 
@@ -59,9 +62,7 @@ export default function Home() {
           {activeSection === 'qna' && <QnaContent />}
         </div>
 
-        {/* 3. JOURNEY CONTROLS */}
         {activeSection !== 'home' && (
-          /* UPDATED: Changed mt-20 to mt-12 and added px-4 (Line 61) */
           <div className="mt-12 md:mt-20 pt-8 border-t border-slate-200 flex flex-col md:flex-row justify-between items-center gap-4 pb-12 px-4">
             {prevSection && prevSection.id !== 'home' ? (
               <button 
