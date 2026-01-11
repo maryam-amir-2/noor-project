@@ -7,106 +7,166 @@ export default function ImaanContent() {
   const pillars = [
     { 
       title: "Allah", 
-      arabic: "باللَّه", 
-      desc: "Believing in the oneness of God (Tawhid), His names, attributes, and that He is the sole Creator and Sustainer.", 
-      verse: "لَيْسَ كَمِثْلِهِ شَيْءٌ ۖ وَهُوَ السَّمِيعُ الْبَصِيرُ", 
-      ref: "42:11" 
+      arabic: "الله",
+      concept: "ONENESS",
+      isDetailed: true,
+      sections: [
+        {
+          label: "1. The Lord (Ruboobiyyah)",
+          desc: "Believing Allah is the only Creator and Owner of everything. He gives us life, food, and air. No one helps Him run the universe.",
+          ref: "Quran 39:62"
+        },
+        {
+          label: "2. Worship (Uloohiyyah)",
+          desc: "This means we pray, fast, and ask for help from Allah ONLY. Praying to anyone else is the biggest sin (Shirk).",
+          ref: "Quran 72:18"
+        },
+        {
+          label: "3. Names & Qualities",
+          desc: "Believing Allah is perfect. He is the All-Hearing and All-Seeing. We don't imagine Him looking like a human.",
+          ref: "Quran 42:11"
+        }
+      ],
+      footerRef: "Prophet ﷺ said: 'The right of Allah is that we worship Him and don't join anyone with Him.'"
     },
     { 
       title: "Angels", 
-      arabic: "بِالْمَلَائِكَةِ", 
-      desc: "Believing in these unseen beings created from light, who carry out Allah's commands (e.g., Jibril, Mika'il).", 
-      verse: "لَّا يَعْصُونَ اللَّهَ مَا أَمَرَهُمْ وَيَفْعَلُونَ مَا يُؤْمَرُونَ", 
-      ref: "66:6" 
+      arabic: "المَلَائِكَة",
+      concept: "UNSEEN SERVANTS",
+      desc: "Made from light, they always obey Allah and never make mistakes. They are not 'gods' and we do not pray to them.",
+      details: "Jibreel brings the Message, others record our good and bad deeds every day.",
+      ref: "Surah An-Nisa 4:136",
+      hadith: "Angels were created from light. (Sahih Muslim)"
     },
     { 
       title: "Books", 
-      arabic: "بِالْكُتُبِ", 
-      desc: "Believing in the divine scriptures Allah revealed, such as the Torah, Gospel, Psalms, and the Quran.", 
-      verse: "نَزَّلَ عَلَيْكَ الْكِتَابَ بِالْحَقِّ مُصَدِّقًا لِّمَا بَيْنَ يَدَيْهِ", 
-      ref: "3:3" 
+      arabic: "الكُتُب",
+      concept: "THE BOOKS",
+      desc: "Allah sent books to show us how to live. We believe in the original Torah and Gospel, but they were changed by people.",
+      details: "The Quran is the final book. Allah promised to protect it from ever being changed.",
+      ref: "Surah Al-Ma'idah 5:48",
+      hadith: "The Quran confirms the books that came before it."
     },
     { 
       title: "Messengers", 
-      arabic: "بِالرُّسُلِ", 
-      desc: "Believing in all the prophets sent by Allah, from Adam to Muhammad (peace be upon them all).", 
-      verse: "لَا نُفَرِّقُ بَيْنَ أَحَدٍ مِّن رُّسُلِهِ", 
-      ref: "2:285" 
+      arabic: "الرُّسُل",
+      concept: "PROPHETS",
+      desc: "Allah chose the best men to teach us. We love and believe in all of them, from Adam and Noah to Jesus and Moses.",
+      details: "Muhammad ﷺ is the final Prophet. He was sent to teach all of humanity.",
+      ref: "Surah Faatir 35:24",
+      hadith: "All Prophets taught the same message: Worship Allah alone."
     },
     { 
       title: "Last Day", 
-      arabic: "بِالْيَوْمِ الْآخِرِ", 
-      desc: "Believing in the Day of Judgment, resurrection, accountability, paradise, and hellfire.", 
-      verse: "وَأَنَّ السَّاعَةَ آتِيَةٌ لَّا رَيْبَ فِيهَا", 
-      ref: "22:7" 
+      arabic: "اليَوْم الآخِر",
+      concept: "JUDGMENT DAY",
+      desc: "This life is a test that will end. One day, Allah will bring everyone back to life to see their deeds.",
+      details: "Good people go to Paradise (Jannah) and bad people to Hell (Naar). It is a day of perfect justice.",
+      ref: "Surah Al-Hajj 22:7",
+      hadith: "Allah will bring the dead out of their graves."
     },
     { 
-      title: "Qadar", 
-      arabic: "بِالْقَدَرِ", 
-      desc: "Believing that everything, good or bad, happens by Allah's knowledge and will, but humans have free will to choose their actions.", 
-      verse: "إِنَّا كُلَّ شَيْءٍ خَلَقْنَاهُ بِقَدَرٍ", 
-      ref: "54:49" 
+      title: "The Decree", 
+      arabic: "القَدَر",
+      concept: "ALLAH'S PLAN",
+      desc: "Allah knows everything before it happens. Nothing is a surprise to Him. He has written our life story.",
+      details: "This makes us patient when things are hard and thankful when things are good. We trust His plan.",
+      ref: "Surah Al-Qamar 54:49",
+      hadith: "Everything happens by Allah's will."
     }
   ];
 
   return (
-    <div className="max-w-4xl mx-auto space-y-10 py-4">
-      {/* Intro Section */}
-      <div className="border-l-4 border-emerald-600 pl-6">
-        <h3 className="text-4xl font-black text-slate-900 tracking-tighter italic uppercase">Al-Imaan</h3>
-        <p className="text-slate-900 font-bold text-sm tracking-widest mt-1">
-          The six pillars (or articles) of Iman (faith) form the foundation of a Muslim's belief, established in the famous Hadith of Jibril.
-        </p>
+    <div className="max-w-sm mx-auto p-4 space-y-6">
+      {/* Header Area */}
+      <div className="flex items-center justify-between border-b border-slate-100 pb-4">
+        <div>
+          <h2 className="text-2xl font-black text-slate-900 tracking-tighter uppercase leading-none">Imaan</h2>
+          <p className="text-[9px] font-bold text-slate-400 uppercase tracking-[0.2em] mt-1">Foundations of Faith</p>
+        </div>
+        <div className="flex gap-1.5">
+          {pillars.map((_, i) => (
+            <div key={i} className={`h-1 w-3 rounded-full transition-all ${active === i ? "bg-amber-500 w-6" : "bg-slate-200"}`} />
+          ))}
+        </div>
       </div>
 
-      {/* 3x2 Grid - Fixed Colors */}
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-        {pillars.map((p, i) => (
-          <button
-            key={i}
-            onClick={() => setActive(i)}
-            className={`p-6 rounded-2xl text-left transition-all border-2 ${
-              active === i 
-              ? "bg-slate-900 border-slate-900 shadow-xl scale-[1.02]" 
-              : "bg-white border-slate-200 hover:border-emerald-500"
-            }`}
-          >
-            <p className={`text-[10px] font-black mb-1 ${active === i ? "text-emerald-400" : "text-emerald-700"}`}>
-              PILLAR 0{i+1}
-            </p>
-            <p className={`font-black text-sm uppercase tracking-tight ${active === i ? "text-white" : "text-slate-900"}`}>
-              {p.title}
-            </p>
-          </button>
-        ))}
-      </div>
-
-      {/* Detail Box - High Contrast */}
-      <div className="bg-white border-2 border-slate-900 rounded-[2.5rem] overflow-hidden shadow-[8px_8px_0px_0px_rgba(15,23,42,1)]">
-        <div className="p-8 md:p-12 space-y-8">
-          <div className="flex justify-between items-start">
-            <h4 className="text-3xl font-black text-slate-900 underline decoration-emerald-500 underline-offset-8 decoration-4">
-              {pillars[active].title}
-            </h4>
-            <span className="text-3xl font-arabic text-emerald-700 font-bold">{pillars[active].arabic}</span>
+      {/* Main Card */}
+      <div className="relative">
+        <div className="bg-slate-900 rounded-[2.5rem] p-6 text-white shadow-2xl h-[500px] flex flex-col border border-slate-800">
+          
+          {/* Top Section */}
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <p className="text-[10px] font-black text-amber-500 mb-1 uppercase tracking-widest">Article 0{active + 1}</p>
+              <h3 className="text-2xl font-black uppercase tracking-tight leading-none">{pillars[active].title}</h3>
+            </div>
+            <span className="text-4xl font-arabic text-amber-500 font-bold leading-none">
+              {pillars[active].arabic}
+            </span>
           </div>
 
-          <p className="text-xl font-bold text-slate-900 leading-relaxed max-w-2xl">
-            {pillars[active].desc}
-          </p>
+          {/* Body Section */}
+          <div className="flex-1 overflow-y-auto pr-1 space-y-4">
+            {pillars[active].isDetailed ? (
+              <div className="space-y-4">
+                {pillars[active].sections.map((sec, idx) => (
+                  <div key={idx} className="space-y-1 border-l-2 border-amber-500/40 pl-3">
+                    <h4 className="text-[10px] font-black text-amber-500 uppercase">{sec.label}</h4>
+                    <p className="text-[13px] text-slate-200 leading-snug font-medium">{sec.desc}</p>
+                    <p className="text-[9px] text-slate-500 font-bold uppercase tracking-tighter">{sec.ref}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="space-y-4">
+                <p className="text-sm font-bold text-slate-200 leading-relaxed">
+                  {pillars[active].desc}
+                </p>
+                <div className="bg-white/5 rounded-2xl p-4 border border-white/10">
+                  <p className="text-[12px] text-slate-400 leading-relaxed italic font-medium">
+                    {pillars[active].details}
+                  </p>
+                </div>
+                <div className="space-y-2 pt-2">
+                    <div className="flex items-center gap-2">
+                        <span className="w-1 h-1 bg-amber-500 rounded-full" />
+                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-tighter">Source: {pillars[active].ref}</p>
+                    </div>
+                </div>
+              </div>
+            )}
+          </div>
 
-          <div className="bg-slate-900 rounded-3xl p-8 text-white relative">
-            <p className="text-2xl font-arabic text-right mb-6 leading-loose text-white">
-              {pillars[active].verse}
+          {/* Navigation Controls */}
+          <div className="mt-4 pt-4 border-t border-white/5 flex items-center justify-between">
+            <p className="text-[9px] font-black text-slate-500 uppercase tracking-widest">
+              Topic: <span className="text-slate-300">{pillars[active].concept}</span>
             </p>
-            <div className="flex items-center gap-3">
-              <span className="h-1 bg-emerald-500 flex-1"></span>
-              <span className="text-xs font-black text-emerald-400 tracking-widest uppercase">
-                Quran {pillars[active].ref}
-              </span>
+            <div className="flex gap-2">
+                <button 
+                  disabled={active === 0}
+                  onClick={() => setActive(active - 1)}
+                  className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white disabled:opacity-0"
+                >
+                    ←
+                </button>
+                <button 
+                  disabled={active === 5}
+                  onClick={() => setActive(active + 1)}
+                  className="w-10 h-10 rounded-full bg-amber-500 text-slate-900 flex items-center justify-center font-black"
+                >
+                    →
+                </button>
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="bg-slate-50 rounded-2xl p-4 border border-slate-100">
+        <p className="text-[11px] text-slate-500 text-center font-bold leading-relaxed">
+          Prophet Muhammad ﷺ said: "Imaan is to believe in Allah, His Angels, His Books, His Messengers, the Last Day, and His Plan (Qadar)."
+        </p>
       </div>
     </div>
   );
