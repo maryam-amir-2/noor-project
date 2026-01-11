@@ -5,47 +5,63 @@ export default function Pillars() {
   const [activeTab, setActiveTab] = useState('overview');
 
   const pillarData = [
-    { id: 'shahadah', title: '01. Shahadah', icon: '☝️' },
-    { id: 'salah', title: '02. Salah', icon: '🕌' },
-    { id: 'zakah', title: '03. Zakah', icon: '💰' },
-    { id: 'sawm', title: '04. Sawm', icon: '🌙' },
-    { id: 'hajj', title: '05. Hajj', icon: '🕋' },
+    { id: 'shahadah', title: 'Shahadah', sub: 'Faith', icon: '☝️', color: 'bg-emerald-50 text-emerald-700 border-emerald-200', active: 'bg-emerald-600 text-white' },
+    { id: 'salah', title: 'Salah', sub: 'Prayer', icon: '🕌', color: 'bg-blue-50 text-blue-700 border-blue-200', active: 'bg-blue-600 text-white' },
+    { id: 'zakah', title: 'Zakah', sub: 'Charity', icon: '💰', color: 'bg-amber-50 text-amber-700 border-amber-200', active: 'bg-amber-600 text-white' },
+    { id: 'sawm', title: 'Sawm', sub: 'Fasting', icon: '🌙', color: 'bg-indigo-50 text-indigo-700 border-indigo-200', active: 'bg-indigo-600 text-white' },
+    { id: 'hajj', title: 'Hajj', sub: 'Pilgrimage', icon: '🕋', color: 'bg-slate-100 text-slate-700 border-slate-200', active: 'bg-slate-900 text-white' },
   ];
 
   return (
-    <section className="max-w-5xl mx-auto px-4 py-8">
-      {/* 1. THE AUTHORITY HEADER */}
-      <div className="bg-slate-950 text-white p-8 rounded-3xl mb-8 text-center shadow-xl border-b-4 border-emerald-600">
-        <h2 className="text-3xl font-black mb-4 uppercase tracking-tighter text-emerald-400">The 5 Foundations</h2>
-        <div className="bg-slate-900 p-4 rounded-xl inline-block border border-slate-800">
-          <p className="italic text-emerald-100 text-sm font-medium">
-            "Islam is built upon five..." — Prophet Muhammad ﷺ [Sahih Bukhari 8]
+    <section className="max-w-5xl mx-auto px-4 py-6 md:py-10">
+      <div className="bg-slate-950 text-white p-6 rounded-3xl mb-6 shadow-xl border-b-4 border-emerald-600 text-center relative overflow-hidden">
+        <div className="relative z-10">
+          <span className="text-emerald-400 font-bold tracking-[0.2em] text-[10px] uppercase mb-2 block">The Framework</span>
+          <h2 className="text-3xl font-black mb-2 uppercase tracking-tighter text-white">The 5 Pillars</h2>
+          <p className="text-slate-400 text-xs font-medium max-w-sm mx-auto">
+            These are the non-negotiable foundations of a Muslim's life.
           </p>
         </div>
-        <p className="mt-6 text-slate-300 text-sm max-w-xl mx-auto font-bold leading-relaxed">
-          These are Fard (Obligatory). Fulfilling them with sincerity leads to Allah's Love and Jannah.
-        </p>
       </div>
 
-      {/* 2. PILLAR NAVIGATION */}
-      <div className="flex overflow-x-auto gap-2 mb-8 pb-2 no-scrollbar">
-        {pillarData.map((p) => (
+      <div className="grid grid-cols-2 md:flex md:flex-wrap gap-2 mb-6">
+        <button
+          onClick={() => setActiveTab('overview')}
+          className={`col-span-2 md:col-span-1 p-3 rounded-xl font-bold text-xs uppercase tracking-wide transition-all border-2 flex items-center justify-center gap-2 ${
+            activeTab === 'overview' ? "bg-slate-900 border-slate-900 text-white shadow-md" : "bg-white border-slate-100 text-slate-400"
+          }`}
+        >
+          <span>🏠</span> Overview
+        </button>
+        {pillarData.map((tab) => (
           <button
-            key={p.id}
-            onClick={() => setActiveTab(p.id)}
-            className={`flex-shrink-0 px-6 py-3 rounded-full font-black text-xs uppercase tracking-widest transition-all ${
-              activeTab === p.id 
-              ? "bg-emerald-600 text-white shadow-lg scale-105" 
-              : "bg-white text-slate-900 border-2 border-slate-100 hover:border-emerald-200"
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            className={`p-3 rounded-xl font-bold text-left transition-all border-2 flex flex-col justify-center ${
+              activeTab === tab.id ? `${tab.active} border-transparent shadow-md scale-[1.02]` : `bg-white ${tab.color} border-transparent`
             }`}
           >
-            {p.icon} {p.title}
+            <div className="flex justify-between items-start w-full">
+              <span className="text-lg">{tab.icon}</span>
+              <span className="text-[10px] opacity-60 uppercase tracking-widest">{tab.sub}</span>
+            </div>
+            <span className="text-sm font-black mt-1">{tab.title}</span>
           </button>
         ))}
       </div>
 
-      {/* 3. CONTENT AREA */}
-      <div className="bg-white rounded-[2.5rem] border-2 border-slate-100 p-6 md:p-10 shadow-sm animate-in fade-in zoom-in duration-500">
+      <div className="bg-white border-2 border-slate-100 rounded-[1.5rem] md:rounded-[2.5rem] p-4 md:p-10 shadow-sm min-h-[400px]">
+        {activeTab === 'overview' && (
+           <div className="text-center space-y-6 max-w-xl mx-auto py-8">
+             <div className="w-20 h-20 bg-emerald-50 rounded-full flex items-center justify-center mx-auto text-4xl shadow-inner">🕌</div>
+             <div className="space-y-3">
+                <h3 className="text-2xl font-black text-slate-900 uppercase">The Foundation</h3>
+                <p className="text-slate-600 leading-relaxed text-sm md:text-base font-medium">
+                  Just as a house collapses without pillars, Islam cannot stand without these five actions. They are the priority before anything else.
+                </p>
+             </div>
+           </div>
+        )}
         {activeTab === 'shahadah' && <ShahadahContent />}
         {activeTab === 'salah' && <SalahContent />}
         {activeTab === 'zakah' && <ZakahContent />}
@@ -56,300 +72,204 @@ export default function Pillars() {
   );
 }
 
-/* --- SUB-COMPONENTS --- */
-
 function ShahadahContent() {
-  const conditions = [
-    { title: "Al-’Ilm (Knowledge)", desc: "Understanding the meaning of the declaration, both what it negates and what it affirms." },
-    { title: "Al-Yaqeen (Certainty)", desc: "Having absolute certainty in the heart without even a grain of doubt." },
-    { title: "Al-Ikhlaas (Sincerity)", desc: "Directing all worship to Allah alone, seeking only His pleasure." },
-    { title: "As-Sidq (Truthfulness)", desc: "Saying it from the heart, where the heart matches what the tongue speaks." },
-    { title: "Al-Mahabbah (Love)", desc: "Loving this statement, what it stands for, and those who act upon it." },
-    { title: "Al-Inqiyaad (Submission)", desc: "Complete physical and spiritual submission to the commands of Allah." },
-    { title: "Al-Qubool (Acceptance)", desc: "Accepting everything this statement necessitates with a willing heart." }
+  return (
+    <div className="space-y-6">
+      <div className="bg-emerald-50 rounded-2xl p-6 md:p-10 text-center border border-emerald-100">
+        <p className="text-2xl md:text-4xl font-arabic text-emerald-900 leading-[2.0] mb-4">لَا إِلٰهَ إِلَّا الله مُحَمَّدٌ رَسُولُ الله</p>
+        <div className="h-px bg-emerald-200 w-1/2 mx-auto my-4"></div>
+        <p className="text-sm font-bold text-slate-700 italic">"There is no god but Allah, and Muhammad is His Messenger."</p>
+      </div>
+      <h4 className="font-black text-slate-900 text-sm uppercase px-2 pt-4">Essential Conditions</h4>
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        {[{ t: "Knowledge", d: "Understanding what you are saying." }, { t: "Certainty", d: "Having zero doubt in your heart." }, { t: "Sincerity", d: "Doing it for Allah, not for people." }, { t: "Submission", d: "Physically acting on Allah's commands." }].map((item, i) => (
+          <div key={i} className="flex items-center gap-4 p-4 rounded-2xl border border-slate-100 hover:border-emerald-200 bg-white transition-colors">
+            <span className="w-8 h-8 rounded-lg bg-slate-900 text-white flex items-center justify-center text-xs font-bold shrink-0">{i+1}</span>
+            <div><p className="font-bold text-slate-900 text-sm">{item.t}</p><p className="text-xs text-slate-500 font-medium">{item.d}</p></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function SalahContent() {
+  const [expandedStep, setExpandedStep] = useState(0);
+  const [showWuduSteps, setShowWuduSteps] = useState(false);
+
+  const wuduSteps = [
+    "1. Intention & Bismillah",
+    "2. Wash hands 3x",
+    "3. Rinse mouth 3x",
+    "4. Clean nose 3x",
+    "5. Wash face 3x",
+    "6. Wash arms to elbows 3x",
+    "7. Wipe head & ears 1x",
+    "8. Wash feet to ankles 3x"
+  ];
+
+  const steps = [
+    { num: "01", title: "Standing (Qiyam)", arabic: "اللهُ أَكْبَرُ", roman: "Allahu Akbar", english: "Allah is Greatest", img: "/salah-1.png", desc: "Begin by standing upright and performing the Takbir al-Ihram by raising your hands and saying 'Allahu Akbar' to start the prayer." },
+    { num: "02", title: "Recitation", arabic: "بِسْمِ اللَّهِ...", roman: "Surah Al-Fatiha", english: "The Opening Chapter", img: "/salah-2.png", desc: "Place your hands on your chest and recite silently from the Quran, including Surah Al-Fatihah and another short passage (in the first two rak'ahs)." },
+    { num: "03", title: "Bowing (Ruku')", arabic: "سُبْحَانَ رَبِّيَ الْعَظِيمِ", roman: "Subhana Rabbiyal 'Adheem", english: "Glory to my Lord, the Magnificent", img: "/salah-3.png", desc: "Say 'Allahu Akbar' and bow, placing hands on knees and keeping the back straight, and say 'Subhana Rabbiyal 'Adheem' at least three times." },
+    { num: "04", title: "Standing (Qaumah)", arabic: "سَمِعَ اللهُ لِمَنْ حَمِدَهُ", roman: "Sami' Allahu liman hamidah", english: "Allah hears who praises Him", img: "/salah-4.png", desc: "Return to a standing position, saying 'Sami'Allahu liman hamidah' while rising and 'Rabbana walakal-hamd' once standing." },
+    { num: "05", title: "Prostration (Sujud)", arabic: "سُبْحَانَ رَبِّيَ الْأَعْلَى", roman: "Subhana Rabbiyal A'laa", english: "Glory to my Lord, the Most High", img: "/salah-5.png", desc: "Say 'Allahu Akbar' and prostrate, ensuring the forehead, nose, palms, knees, and toes touch the ground. Say 'Subhana Rabbiyal A'laa' at least three times." },
+    { num: "06", title: "Sitting (Juloos)", arabic: "رَبِّ اغْفِرْ لِي", roman: "Rabbigh-fir lee", english: "My Lord, forgive me", img: "/salah-6.png", desc: "Rise from prostration, saying 'Allahu Akbar', and sit briefly." },
+    { num: "07", title: "Second Prostration", arabic: "سُبْحَانَ رَبِّيَ الْأَعْلَى", roman: "Subhana Rabbiyal A'laa", english: "Glory to my Lord, the Most High", img: "/salah-7.png", desc: "Say 'Allahu Akbar' and perform a second prostration, again saying 'Subhana Rabbiyal A'laa' three times." },
+    { num: "08", title: "Tashahhud", arabic: "التَّحِيَّاتُ لِلَّهِ...", roman: "At-tahiyyatu lillahi...", english: "All compliments are for Allah...", img: "/salah-8.png", desc: "Following the second prostration of the second rak'ah (and the final rak'ah), sit and recite the Tashahhud and Salatul Ibraheemiyyah." },
+    { num: "09", title: "Concluding (Tasleem)", arabic: "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ", roman: "As-salamu 'alaykum wa rahmatullah", english: "Peace and mercy of Allah be upon you", img: "/salah-9.png", desc: "End the prayer by turning your head to the right and then to the left, saying the greeting each time." }
+  ];
+
+  const prerequisites = [
+    { title: "Wudu", desc: "Ritual purification (ablution).", expandable: true },
+    { title: "Niyyah", desc: "Sincere intention to pray." },
+    { title: "Awrah", desc: "Covering body (Men: navel-knees; Women: all except hands/face)." },
+    { title: "Cleanliness", desc: "Clean body, clothes, and place." },
+    { title: "Qiblah", desc: "Facing the Kaaba in Mecca." },
+    { title: "Proper Time", desc: "Performing within the designated time." },
   ];
 
   return (
-    <div className="space-y-10">
-      <div className="flex justify-between items-center">
-        <h3 className="text-4xl font-black text-slate-900 tracking-tighter">The Shahadah</h3>
-        <span className="bg-emerald-900 text-white text-[10px] font-black px-4 py-1.5 rounded-full tracking-widest uppercase italic">The Key to Jannah</span>
-      </div>
-
-      <div className="p-8 bg-slate-950 rounded-[2.5rem] border-b-8 border-emerald-600 shadow-2xl">
-        <p className="text-4xl font-arabic text-white text-right mb-6 leading-[1.8]">
-          لَا إِلٰهَ إِلَّا الله مُحَمَّدٌ رَسُولُ الله
+    <div className="space-y-8 animate-in fade-in slide-in-from-bottom-2">
+      <div className="bg-blue-50 border border-blue-100 rounded-2xl p-5 md:p-6">
+        <h3 className="font-black text-blue-900 text-lg uppercase mb-3 text-center md:text-left">Complete Prayer Guide</h3>
+        <p className="text-xs text-slate-700 leading-relaxed font-medium mb-4">
+          Salah consists of units called <span className="font-bold">rak'ahs</span>. Below is the full sequence.
         </p>
-        <div className="space-y-4 pt-6 border-t border-slate-800">
-          <p className="text-emerald-400 font-black text-xs tracking-widest uppercase">The Testimony</p>
-          <p className="text-white font-bold text-xl leading-relaxed italic">
-            "None has the right to be worshipped except Allah, and Muhammad is the Messenger of Allah."
-          </p>
-        </div>
       </div>
 
       <div>
-        <h4 className="text-xl font-black text-slate-900 mb-6 flex items-center gap-2">
-          <span className="w-8 h-8 bg-emerald-100 text-emerald-700 rounded-lg flex items-center justify-center text-sm">7</span>
-          The Conditions (Shurut)
-        </h4>
-        <div className="grid md:grid-cols-2 gap-4">
-          {conditions.map((item, idx) => (
-            <div key={idx} className="p-5 bg-white border-2 border-slate-100 rounded-2xl hover:border-emerald-500 transition-colors group">
-              <p className="font-black text-slate-900 group-hover:text-emerald-700 transition-colors mb-1">{item.title}</p>
-              <p className="text-slate-600 text-xs font-bold leading-relaxed">{item.desc}</p>
+        <h4 className="font-black text-slate-900 text-sm uppercase px-2 mb-3">Prerequisites (Conditions)</h4>
+        <div className="grid grid-cols-2 gap-3">
+          {prerequisites.map((item, i) => (
+            <div 
+              key={i} 
+              onClick={() => item.expandable && setShowWuduSteps(!showWuduSteps)}
+              className={`bg-white border-2 rounded-xl p-3 transition-all ${item.expandable ? "cursor-pointer border-blue-200 hover:bg-blue-50/50" : "border-slate-100"}`}
+            >
+              <div className="flex justify-between items-start">
+                <p className="text-xs font-black text-slate-900 mb-1">{item.title}</p>
+                {item.expandable && <span className="text-[10px] text-blue-500 font-bold">{showWuduSteps ? '−' : '+'}</span>}
+              </div>
+              <p className="text-[10px] text-slate-500 leading-tight">{item.desc}</p>
+              
+              {/* Expandable Wudu Steps */}
+              {item.expandable && showWuduSteps && (
+                <div className="mt-3 pt-3 border-t border-blue-100 space-y-1.5 animate-in slide-in-from-top-1">
+                  {wuduSteps.map((step, idx) => (
+                    <p key={idx} className="text-[9px] font-bold text-blue-700 leading-tight">
+                      {step}
+                    </p>
+                  ))}
+                </div>
+              )}
             </div>
           ))}
         </div>
       </div>
-    </div>
-  );
-}
 
-
-function SalahContent() {
-  const [expandedStep, setExpandedStep] = useState(0); // Set 0 to have first one open
-
-  const steps = [
-    { num: "01", title: "Opening Takbir", instruction: "Raise hands to shoulders or ears.", arabic: "اللهُ أَكْبَرُ", roman: "Allahu Akbar", english: "Allah is the Greatest.", ref: "Bukhari 735", img: "/salah-1.png" },
-    { num: "02", title: "The Standing (Qiyam)", instruction: "Right hand over left on chest. Recite Fatiha.", arabic: "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ. الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ. الرَّحْمَنِ الرَّحِيمِ. مَالِكِ يَوْمِ الدِّينِ. إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ. اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ. صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ", roman: "Bismillaahir-Rahmaanir-Raheem...", english: "In the name of Allah... All praise is due to Allah...", ref: "Muslim 395", img: "/salah-2.png" },
-    { num: "03", title: "Ruku (Bowing)", instruction: "Say 'Allahu Akbar'. Back flat, hands on knees.", arabic: "سُبْحَانَ رَبِّيَ الْعَظِيمِ", roman: "Subhana Rabbiyal 'Adheem (3x)", english: "Glory be to my Lord, the Magnificent.", ref: "Muslim 772", img: "/salah-3.png" },
-    { num: "04", title: "Rising from Ruku", instruction: "Stand straight. 'Sami Allahu liman hamidah' while rising.", arabic: "سَمِعَ اللهُ لِمَنْ حَمِدَهُ. رَبَّنَا وَلَكَ الْحَمْدُ", roman: "Sami' Allahu liman hamidah. Rabbana wa lakal hamd.", english: "Allah hears those who praise Him. Our Lord, to You is all praise.", ref: "Bukhari 722", img: "/salah-4.png" },
-    { num: "05", title: "First Sujud", instruction: "Say 'Allahu Akbar'. 7 body parts touch the floor.", arabic: "سُبْحَانَ رَبِّيَ الْأَعْلَى", roman: "Subhana Rabbiyal 'A-la (3x)", english: "Glory be to my Lord, the Most High.", ref: "Muslim 486", img: "/salah-5.png" },
-    { num: "06", title: "Jalsa (Sitting)", instruction: "Say 'Allahu Akbar'. Sit upright between prostrations.", arabic: "اللَّهُمَّ اغْفِرْ لِي، وَارْحَمْنِي، وَاجْبُرْنِي، وَاهْدِنِي، وَارْزُقْنِي", roman: "Allahumma-ghfir-li, war-hamni...", english: "O Allah, forgive me, have mercy on me...", ref: "Tirmidhi 284", img: "/salah-6.png" },
-    { num: "07", title: "Second Sujud", instruction: "Repeat the prostration exactly as the first.", arabic: "سُبْحَانَ رَبِّيَ الْأَعْلَى", roman: "Subhana Rabbiyal 'A-la", english: "Glory be to my Lord, the Most High.", img: "/salah-7.png" },
-    { num: "08", title: "Tashahhud & Salawat", instruction: "Point index finger. Recite testimony and blessings.", arabic: "التَّحِيَّاتُ لِلَّهِ... اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ...", roman: "At-tahiyyatu lillahi... Allahumma salli 'ala Muhammad...", english: "All compliments are for Allah... O Allah, send blessings...", ref: "Bukhari 1202", img: "/salah-8.png" },
-    { num: "09", title: "The Tasleem", instruction: "Turn head right, then left to end.", arabic: "السَّلَامُ عَلَيْكُمْ وَرَحْمَةُ اللهِ", roman: "As-salamu alaykum wa rahmatullah", english: "May peace and mercy be upon you.", ref: "Muslim 582", img: "/salah-9.png" }
-  ];
-
-  return (
-    <div className="space-y-4">
-  {/* NEW HIGH-CONTRAST BANNER */}
-  <div className="bg-slate-950 text-white p-6 rounded-[2rem] mb-6 border-l-8 border-emerald-500 shadow-xl">
-    <p className="text-emerald-400 font-black text-[10px] uppercase tracking-widest mb-2 italic">Essential Prophet ﷺ Guidance</p>
-    <p className="font-bold text-sm leading-relaxed mb-3">
-      "Pray as you have seen me praying" <span className="text-slate-500 font-black text-[9px]">— Bukhari 631</span>. 
-      There is <span className="text-emerald-400 underline underline-offset-4">no difference</span> in positions for men and women.
-    </p>
-    <div className="h-px bg-slate-800 w-full my-3"></div>
-    <p className="text-xs text-slate-300 font-medium">
-      Tap any step to see the full Dua.
-    </p>
-  </div>
-
-      {steps.map((step, index) => (
-        <div 
-          key={step.num} 
-          onClick={() => setExpandedStep(expandedStep === index ? -1 : index)}
-          className={`cursor-pointer group transition-all duration-300 border-2 rounded-3xl overflow-hidden ${
-            expandedStep === index ? "border-emerald-500 shadow-lg bg-white" : "border-slate-100 hover:border-slate-200 bg-slate-50/50"
-          }`}
-        >
-          {/* Main Row: Visible at all times */}
-          <div className="flex items-center p-4 md:p-6 gap-6">
-            <div className="w-20 h-20 md:w-24 md:h-24 bg-white rounded-2xl flex-shrink-0 border border-slate-100 p-2 overflow-hidden shadow-sm group-hover:scale-105 transition-transform">
-              <img src={step.img} alt={step.title} className="w-full h-full object-contain" />
-            </div>
-            
-            <div className="flex-1">
-              <div className="flex items-center gap-3 mb-1">
-                <span className="bg-slate-900 text-white text-[10px] font-black px-2 py-0.5 rounded italic">STEP {step.num}</span>
-                <h3 className={`font-black text-lg md:text-xl tracking-tight transition-colors ${expandedStep === index ? "text-emerald-700" : "text-slate-900"}`}>
-                  {step.title}
-                </h3>
+      {/* Rest of the component remains exactly the same as your provided code */}
+      <div className="space-y-3">
+        <div className="flex items-center justify-between mb-4 px-2">
+          <h4 className="font-black text-slate-900 text-sm uppercase tracking-tight">Step-by-Step Procedure</h4>
+          <span className="text-[9px] text-blue-600 font-bold bg-blue-50 px-2 py-1 rounded-full">Tap to Expand</span>
+        </div>
+        {steps.map((step, index) => (
+          <div key={index} onClick={() => setExpandedStep(expandedStep === index ? -1 : index)} className={`border-2 rounded-2xl overflow-hidden transition-all duration-300 ${expandedStep === index ? "border-blue-500 bg-white shadow-lg" : "border-slate-100 bg-slate-50/50"}`}>
+            <div className="flex items-center p-3 gap-3">
+              <div className="w-14 h-14 bg-white rounded-lg border border-slate-100 p-1 shrink-0 flex items-center justify-center">
+                <img src={step.img} alt={step.title} className="max-w-full max-h-full object-contain" />
               </div>
-              <p className="text-slate-500 text-xs font-bold leading-tight">{step.instruction}</p>
+              <div className="flex-1">
+                <h4 className="font-black text-slate-900 text-xs uppercase tracking-tighter">{step.title}</h4>
+                <p className="text-[10px] text-slate-500 font-bold mt-0.5 line-clamp-1">{step.desc}</p>
+              </div>
+              <div className={`text-slate-300 transition-transform ${expandedStep === index ? "rotate-180 text-blue-500" : ""}`}>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
             </div>
-
-            <div className={`transition-transform duration-300 text-slate-300 ${expandedStep === index ? "rotate-180 text-emerald-500" : ""}`}>
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
-            </div>
-          </div>
-
-          {/* Expandable Content: Hidden unless clicked */}
-          {expandedStep === index && (
-            <div className="px-6 pb-6 animate-in slide-in-from-top-2 duration-300">
-              <div className="bg-slate-950 rounded-[2rem] p-6 shadow-inner border-b-4 border-emerald-500">
-                <p className="text-3xl font-arabic text-white text-right mb-6 leading-[1.8] tracking-wide">
-                  {step.arabic}
-                </p>
-                
-                <div className="space-y-3 pt-4 border-t border-slate-800">
-                  <div className="flex gap-2 items-start">
-                    <span className="text-emerald-500 font-black text-[10px] mt-1 shrink-0">ROMAN:</span>
-                    <p className="text-emerald-400 font-mono text-xs leading-relaxed font-bold uppercase">{step.roman}</p>
-                  </div>
-                  <div className="flex gap-2 items-start">
-                    <span className="text-white font-black text-[10px] mt-1 shrink-0">MEANING:</span>
-                    <p className="text-slate-100 text-sm font-bold leading-relaxed italic">{step.english}</p>
-                  </div>
+            {expandedStep === index && (
+              <div className="bg-slate-950 p-5 text-white animate-in slide-in-from-top-2">
+                <p className="text-2xl font-arabic text-right mb-4 leading-loose">{step.arabic}</p>
+                <p className="text-[11px] text-slate-300 italic mb-4 leading-relaxed">{step.desc}</p>
+                <div className="grid grid-cols-2 gap-4 border-t border-slate-800 pt-3">
+                  <div><span className="text-[9px] text-blue-400 font-black uppercase">Recite</span><p className="text-xs font-bold font-mono">{step.roman}</p></div>
+                  <div><span className="text-[9px] text-emerald-400 font-black uppercase">Meaning</span><p className="text-[10px] italic text-slate-400">"{step.english}"</p></div>
                 </div>
               </div>
-              
-              {step.ref && (
-                <p className="mt-4 text-[9px] font-black text-slate-400 uppercase tracking-widest pl-2">
-                  Reference: {step.ref}
-                </p>
-              )}
-            </div>
-          )}
-        </div>
-      ))}
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div className="bg-slate-50 rounded-3xl p-5 border-2 border-slate-100 space-y-4">
+        <h4 className="font-black text-slate-900 text-sm uppercase text-center border-b pb-2">Prayer Completion Logic</h4>
+        {[
+          { t: "Second Rak'ah", d: "After the first rak'ah, stand up saying 'Allahu Akbar' and repeat the cycle (Steps 2-7)." },
+          { t: "Sitting & Tashahhud", d: "In prayers with 2 rak'ahs (Fajr), perform Step 8 and 9 immediately after the 2nd prostration. In 3 or 4 rak'ah prayers, sit for the first part of Tashahhud after the 2nd rak'ah, then stand back up." },
+          { t: "Final Rak'ah", d: "In the final unit of any prayer, perform the full Tashahhud (Step 8) followed by the Tasleem (Step 9) to finish." }
+        ].map((item, i) => (
+          <div key={i} className="flex gap-4">
+            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-slate-900 text-white text-[10px] font-black shrink-0">{i+1}</span>
+            <div><p className="font-black text-slate-900 text-xs mb-0.5">{item.t}</p><p className="text-[10px] text-slate-500 font-medium leading-relaxed">{item.d}</p></div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
-
 
 function ZakahContent() {
   return (
-    <div className="space-y-10">
-      <div className="flex justify-between items-center">
-        <h3 className="text-4xl font-black text-slate-900 tracking-tighter">Az-Zakah</h3>
-        <span className="bg-emerald-900 text-white text-[10px] font-black px-4 py-1.5 rounded-full tracking-widest uppercase italic">Pillar 03</span>
+    <div className="space-y-6">
+      <div className="bg-amber-50 p-6 rounded-2xl border border-amber-100 text-center">
+        <h3 className="text-3xl font-black text-amber-900 mb-1">2.5%</h3>
+        <p className="text-xs font-bold text-amber-800 uppercase tracking-widest">Of Surplus Wealth</p>
       </div>
-
-      <div className="bg-emerald-50 p-6 rounded-3xl border-2 border-emerald-100">
-        <p className="text-emerald-900 font-bold leading-relaxed">
-          Zakat is a mandatory annual obligation requiring Muslims who meet the <span className="underline decoration-emerald-400 decoration-2">Nisab</span> (wealth threshold) to donate 2.5% of their surplus wealth. It is a spiritual obligation that purifies both your money and your soul.
-        </p>
-      </div>
-
-      {/* Categories */}
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="space-y-6">
-          <div className="p-6 bg-slate-900 rounded-[2rem] text-white">
-            <h4 className="font-black text-emerald-400 text-xs uppercase tracking-widest mb-3 italic">01. Obligation & Purpose</h4>
-            <p className="text-sm font-bold text-slate-100 leading-relaxed">
-              Distinct from voluntary charity (Sadaqah), Zakah purifies wealth, cleanses the soul from greed, and fosters social justice.
-            </p>
-          </div>
-          
-          <div className="p-6 bg-white border-2 border-slate-100 rounded-[2rem]">
-            <h4 className="font-black text-slate-400 text-xs uppercase tracking-widest mb-3 italic">02. Calculation (How it works)</h4>
-            <ul className="text-sm font-bold text-slate-800 space-y-3">
-              <li className="flex gap-2">• <span className="text-emerald-600">Nisab:</span> Threshold of 85g gold or 595g silver.</li>
-              <li className="flex gap-2">• <span className="text-emerald-600">Amount:</span> 2.5% (1/40th) of accumulated savings.</li>
-              <li className="flex gap-2">• <span className="text-emerald-600">Duration:</span> Wealth must be held for 1 full Lunar Year.</li>
-            </ul>
+      <div className="space-y-4">
+        <div className="bg-white border-2 border-slate-100 rounded-2xl p-5"><h4 className="font-black text-slate-900 text-sm mb-2">How it works</h4><p className="text-xs text-slate-600 leading-relaxed font-medium">If you have savings above the threshold (Nisab) held for one full lunar year, you give 2.5% to the poor.</p></div>
+        <div>
+          <h4 className="font-black text-slate-900 text-sm uppercase px-2 mb-2">Who receives it?</h4>
+          <div className="grid grid-cols-2 gap-2">
+            {["The Poor", "The Needy", "Debt-ridden", "Travelers", "New Muslims", "Captives", "Zakat Workers", "Cause of Allah"].map((item, i) => (
+              <div key={i} className="bg-slate-50 p-2 rounded-lg text-center border border-slate-100"><span className="text-[10px] font-bold text-slate-700">{item}</span></div>
+            ))}
           </div>
         </div>
-
-        <div className="bg-slate-50 p-8 rounded-[2rem] border-2 border-slate-100 flex flex-col justify-center">
-          <h4 className="font-black text-slate-900 text-sm mb-4 uppercase tracking-tighter">The Divine Command (Full Verse)</h4>
-          <p className="text-2xl font-arabic text-right mb-4 leading-loose text-slate-800">
-            إِنَّمَا الصَّدَقَاتُ لِلْفُقَرَاءِ وَالْمَسَاكِينِ وَالْعَامِلِينَ عَلَيْهَا وَالْمُؤَلَّفَةِ قُلُوبُهُمْ وَفِي الرِّقَابِ وَالْغَارِمِينَ وَفِي سَبِيلِ اللَّهِ وَابْنِ السَّبِيلِ ۖ فَرِيضَةً مِّنَ اللَّهِ ۗ وَاللَّهُ عَلِيمٌ حَكِيمٌ
-          </p>
-          <div className="pt-4 border-t border-slate-200">
-            <p className="text-slate-600 text-xs font-bold italic leading-relaxed">
-              "Zakah expenditures are only for the poor and for the needy and for those employed to collect [zakah] and for bringing hearts together [for Islam] and for freeing captives [or slaves] and for those in debt and for the cause of Allah and for the [stranded] traveler - an obligation [imposed] by Allah. And Allah is Knowing and Wise."
-            </p>
-            <p className="mt-3 text-[10px] font-black text-emerald-600 uppercase tracking-widest">Surah At-Tawbah 9:60</p>
-          </div>
-        </div>
-      </div>
-
-      <div className="p-6 bg-slate-950 rounded-3xl text-center">
-        <p className="text-white font-black text-sm uppercase tracking-[0.3em]">Redistribution of Wealth • Purification • Justice</p>
       </div>
     </div>
   );
 }
-
 
 function SawmContent() {
   return (
-    <div className="space-y-10">
-      <div className="flex justify-between items-center">
-        <h3 className="text-4xl font-black text-slate-900 tracking-tighter">As-Sawm</h3>
-        <span className="bg-emerald-900 text-white text-[10px] font-black px-4 py-1.5 rounded-full tracking-widest uppercase italic">Pillar 04</span>
+    <div className="space-y-6">
+      <div className="flex justify-between items-center bg-indigo-50 p-5 rounded-2xl border border-indigo-100">
+        <div><h3 className="font-black text-indigo-900 text-lg">Ramadan</h3><p className="text-[10px] text-indigo-700 font-bold uppercase tracking-wide">The Month of Quran</p></div>
+        <span className="text-3xl">🌙</span>
       </div>
-
-      <div className="p-8 bg-slate-950 rounded-[2.5rem] border-b-8 border-emerald-600 shadow-2xl">
-        <p className="text-2xl font-arabic text-white text-right mb-6 leading-[1.8]">
-          يَا أَيُّهَا الَّذِينَ آمَنُوا كُتِبَ عَلَيْكُمُ الصِّيَامُ كَمَا كُتِبَ عَلَى الَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ
-        </p>
-        <div className="space-y-4 pt-6 border-t border-slate-800">
-          <p className="text-emerald-400 font-black text-xs tracking-widest uppercase">The Command</p>
-          <p className="text-white font-bold text-lg leading-relaxed italic">
-            "O you who have believed, decreed upon you is fasting as it was decreed upon those before you that you may become God-conscious (Taqwa)."
-          </p>
-          <p className="text-[10px] font-black text-slate-500 tracking-widest">SURAH AL-BAQARAH 2:183</p>
-        </div>
+      <div className="grid grid-cols-2 gap-3">
+         <div className="p-4 rounded-xl border-2 border-slate-100 bg-white text-center"><p className="text-[9px] font-black text-slate-400 uppercase mb-1">From</p><p className="font-bold text-slate-900 text-xs">Fajr (Dawn)</p></div>
+         <div className="p-4 rounded-xl border-2 border-slate-100 bg-white text-center"><p className="text-[9px] font-black text-slate-400 uppercase mb-1">Until</p><p className="font-bold text-slate-900 text-xs">Maghrib (Sunset)</p></div>
       </div>
-
-      <div className="grid md:grid-cols-3 gap-4">
-        <div className="p-6 bg-white border-2 border-slate-100 rounded-3xl">
-          <h4 className="font-black text-slate-900 text-xs uppercase mb-3 tracking-widest">The "How"</h4>
-          <p className="text-slate-600 text-xs font-bold leading-relaxed">
-            Abstaining from food, drink, and marital relations from <span className="text-emerald-600">Fajr (Dawn)</span> until <span className="text-emerald-600">Maghrib (Sunset)</span> with the sincere intention of worshipping Allah.
-          </p>
-        </div>
-        <div className="p-6 bg-white border-2 border-slate-100 rounded-3xl">
-          <h4 className="font-black text-slate-900 text-xs uppercase mb-3 tracking-widest">The "What to Avoid"</h4>
-          <p className="text-slate-600 text-xs font-bold leading-relaxed">
-            Fasting is not just of the stomach. One must avoid lying, backbiting, arguing, and all sinful speech or behavior that diminishes the reward.
-          </p>
-        </div>
-        <div className="p-6 bg-emerald-50 border-2 border-emerald-100 rounded-3xl">
-          <h4 className="font-black text-emerald-900 text-xs uppercase mb-3 tracking-widest">The Benefit</h4>
-          <p className="text-emerald-800 text-xs font-bold leading-relaxed">
-            It builds Taqwa (God-consciousness), develops self-discipline, and helps us empathize with those who go hungry every day of the year.
-          </p>
-        </div>
+      <div className="bg-white p-5 rounded-2xl border-2 border-slate-100">
+        <p className="text-xs text-slate-600 font-medium leading-relaxed italic">"Whoever does not give up false speech and evil deeds, Allah is not in need of his leaving his food and drink."</p>
       </div>
     </div>
   );
 }
 
-
-
 function HajjContent() {
-  const hajjSteps = [
-    { title: "Ihram", desc: "Entering a state of ritual purity and wearing the specific white garments." },
-    { title: "Tawaf", desc: "Circling the Kaaba seven times in the Masjid al-Haram." },
-    { title: "Sa'i", desc: "Walking seven times between the hills of Safa and Marwa." },
-    { title: "Arafah", desc: "The pinnacle of Hajj: standing on the plain of Arafat in prayer and repentance." },
-    { title: "Muzdalifah", desc: "Staying overnight and gathering pebbles for the stoning." },
-    { title: "Ramy al-Jamarat", desc: "Symbolically stoning the devil to reject evil." }
-  ];
-
   return (
-    <div className="space-y-10">
-      <div className="flex justify-between items-center">
-        <h3 className="text-4xl font-black text-slate-900 tracking-tighter">Al-Hajj</h3>
-        <span className="bg-emerald-900 text-white text-[10px] font-black px-4 py-1.5 rounded-full tracking-widest uppercase italic">Pillar 05</span>
+    <div className="space-y-6">
+      <div className="bg-slate-900 text-white p-6 rounded-2xl text-center relative overflow-hidden">
+        <h3 className="font-black text-xl mb-1">The Pilgrimage</h3>
+        <p className="text-xs text-slate-300 font-medium italic">Once in a lifetime (if able)</p>
       </div>
-
-      <div className="bg-slate-50 p-8 rounded-[2.5rem] border-2 border-slate-100">
-        <p className="text-2xl font-arabic text-right mb-6 leading-loose text-slate-800">
-          وَلِلَّهِ عَلَى النَّاسِ حِجُّ الْبَيْتِ مَنِ اسْتَطَاعَ إِلَيْهِ سَبِيلًا ۚ وَمَن كَفَرَ فَإِنَّ اللَّهَ غَنِيٌّ عَنِ الْعَالَمِينَ
-        </p>
-        <div className="pt-4 border-t border-slate-200">
-          <p className="text-slate-600 font-bold text-sm italic leading-relaxed">
-            "And [due] to Allah from the people is a pilgrimage to the House - for whoever is able to find thereto a way. But whoever disbelieves - then indeed, Allah is free from need of the worlds."
-          </p>
-          <p className="mt-3 text-[10px] font-black text-emerald-600 uppercase tracking-widest">SURAH ALI 'IMRAN 3:97</p>
-        </div>
-      </div>
-
-      <div className="bg-slate-900 rounded-[2rem] p-8 text-white shadow-xl">
-        <h4 className="text-emerald-400 font-black text-xs uppercase tracking-widest mb-6">The Journey (Brief Overview)</h4>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
-          {hajjSteps.map((step, idx) => (
-            <div key={idx} className="space-y-2">
-              <span className="text-[10px] font-black text-slate-500 uppercase italic">Step {idx + 1}</span>
-              <p className="font-bold text-sm text-white">{step.title}</p>
-              <p className="text-[10px] text-slate-400 leading-relaxed">{step.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      <div className="p-6 bg-emerald-900 rounded-2xl text-center">
-        <p className="text-emerald-100 font-bold text-sm leading-relaxed">
-          Hajj is mandatory once in a lifetime for every Muslim who is physically and financially able. 
-          It is a complete reset of the soul, erasing past sins for those whose Hajj is accepted.
-        </p>
+      <div className="space-y-3">
+        {[{ step: "1. Ihram", desc: "Enter state of purity" }, { step: "2. Tawaf", desc: "Circle Kaaba 7 times" }, { step: "3. Sa'i", desc: "Walk Safa to Marwa" }, { step: "4. Arafah", desc: "The main day of prayer" }].map((s, i) => (
+          <div key={i} className="flex items-center justify-between p-3 border-b border-slate-100"><span className="font-bold text-slate-900 text-xs">{s.step}</span><span className="text-[10px] text-slate-500">{s.desc}</span></div>
+        ))}
       </div>
     </div>
   );
